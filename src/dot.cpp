@@ -3,9 +3,9 @@
 Dot::Dot() {}
 Dot::Dot(byte x_position) : x(x_position) {}
 
-void Dot::update(uint16_t speed, LedController &matrix)
+void Dot::update(uint16_t speed)
 {
-    if (millis() - ulast > speed && !somethingDown(matrix))
+    if (millis() - ulast > speed && !somethingDown())
     {
         isMoving = true;
         ulast = millis();
@@ -15,7 +15,7 @@ void Dot::update(uint16_t speed, LedController &matrix)
         isMoving = false;
 }
 
-void Dot::draw(LedController &matrix)
+void Dot::draw()
 {
     if (y <= 7)
     {
@@ -25,19 +25,19 @@ void Dot::draw(LedController &matrix)
     }
 }
 
-void Dot::setPoint(uint8_t new_x, uint8_t new_y, LedController& matrix)
+void Dot::setPoint(uint8_t new_x, uint8_t new_y)
 {
-    setX(new_x, matrix);
-    setY(new_y, matrix);
+    setX(new_x);
+    setY(new_y);
 }
 
-void Dot::setX(uint8_t new_x, LedController& matrix)
+void Dot::setX(uint8_t new_x)
 {
     matrix.setLed(0, getX(), getY(), false);
     x = new_x;
 }
 
-void Dot::setY(uint8_t new_y, LedController& matrix)
+void Dot::setY(uint8_t new_y)
 {
     matrix.setLed(0, getX(), getY(), false);
     y = new_y;
@@ -46,7 +46,7 @@ void Dot::setY(uint8_t new_y, LedController& matrix)
 uint8_t Dot::getX() { return x; }
 uint8_t Dot::getY() { return y; }
 
-bool Dot::somethingDown(LedController &matrix)
+bool Dot::somethingDown()
 {
     return (matrix.getRow(0, x) & (1 << (6 - y))) >> (6 - y) || y > 7;
 }

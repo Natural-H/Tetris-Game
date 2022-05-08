@@ -15,11 +15,11 @@ public:
         form4
     };
 
-    virtual void update(LedController&);
-    virtual void draw(LedController&);
-    virtual void moveRight(LedController&);
-    virtual void moveLeft(LedController&);
-    virtual void setForm(Rotations form, LedController&);
+    virtual void update();
+    virtual void draw();
+    virtual void moveRight();
+    virtual void moveLeft();
+    virtual void setForm(Rotations form);
 
     ~Shape();
 

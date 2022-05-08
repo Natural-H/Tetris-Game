@@ -1,22 +1,25 @@
+#include "dot.hpp"
 #include "shapes/line.hpp"
 #include "LedController.hpp"
 
+LedController matrix(13, 11, 12, 1);
+LedController& Dot::matrix = matrix;
 Line line = Line();
-LedController ledController(13, 11, 12, 1);
 
 void inita()
 {
     pinMode(2, INPUT);
     pinMode(3, INPUT);
-    ledController.setIntensity(15);
+    matrix.setIntensity(15);
 }
 
 void update()
 {
-    line.update(ledController);
+    matrix.setColumn(0, 2, 255);
+    line.update();
 }
 
 void draw()
 {
-    line.draw(ledController);
+    line.draw();
 }
