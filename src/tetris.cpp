@@ -5,6 +5,7 @@
 
 LedController Dot::matrix = LedController(13, 11, 12, 1);
 vector<Line> a;
+unsigned long last = 0;
 // Line line = Line();
 
 void inita()
@@ -12,21 +13,25 @@ void inita()
     pinMode(2, INPUT);
     pinMode(3, INPUT);
     Dot::matrix.setIntensity(15);
-
-    for (size_t i = 0; i < 5; i++)
-        a.push_back(Line(i));
+    a.push_back(Line());
 }
 
 void update()
 {
-    for (size_t i = 0; i < 10; i++)
+    if (millis() - last > 300)
+    {
+        a.push_back(Line());
+        last = millis();
+    }
+
+    for (int i = 0; i < a.size() - 1; i++)
         a[i].update();
     // line.update();
 }
 
 void draw()
 {
-    for (size_t i = 0; i < 10; i++)
+    for (int i = 0; i < a.size() - 1; i++)
         a[i].draw();
     // line.draw();
 }
