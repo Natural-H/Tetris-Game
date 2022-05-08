@@ -10,7 +10,7 @@ private:
     bool isMoving = false;
 
 public:
-    static LedController &matrix;
+    static LedController matrix;
     Dot(void);
     Dot(byte);
 
