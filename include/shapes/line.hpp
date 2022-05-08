@@ -13,5 +13,6 @@ public:
     void setForm(Rotations form) override;
 
     Line();
+    Line(uint8_t);
     ~Line();
 };

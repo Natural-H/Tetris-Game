@@ -6,6 +6,12 @@ Line::Line()
     dots[1] = Dot(5);
 }
 
+Line::Line(uint8_t x)
+{
+    dots[0] = Dot(x);
+    dots[1] = Dot(x + 1);
+}
+
 void Line::update()
 {
     if (digitalRead(3) && dots[0].getX() < 8)
