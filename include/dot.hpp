@@ -10,16 +10,17 @@ private:
     bool isMoving = false;
 
 public:
+    static LedController matrix;
     Dot(void);
     Dot(byte);
 
-    void update(uint16_t, LedController&);
-    void draw(LedController&);
-    void setPoint(uint8_t, uint8_t, LedController&);
-    void setX(uint8_t, LedController&);
-    void setY(uint8_t, LedController&);
+    void update(uint16_t);
+    void draw();
+    void setPoint(uint8_t, uint8_t);
+    void setX(uint8_t);
+    void setY(uint8_t);
 
-    bool somethingDown(LedController&);
+    bool somethingDown();
     uint8_t getX();
     uint8_t getY();
 
