@@ -7,7 +7,6 @@ class Dot
 private:
     int8_t x, y = -1;
     unsigned long ulast = 0;
-    bool isMoving = false;
 
 public:
     static LedController matrix;
@@ -21,6 +20,7 @@ public:
     void setY(uint8_t);
 
     bool somethingDown();
+    bool isMoving = false;
     uint8_t getX();
     uint8_t getY();
 

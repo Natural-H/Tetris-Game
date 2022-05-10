@@ -10,28 +10,31 @@ unsigned long last = 0;
 
 void inita()
 {
-    pinMode(2, INPUT);
-    pinMode(3, INPUT);
     Dot::matrix.setIntensity(15);
     a.push_back(Line());
 }
 
 void update()
 {
-    if (millis() - last > 300)
-    {
-        a.push_back(Line());
-        last = millis();
-    }
+    // if (millis() - last > 2000)
+    // {
+    //     a.push_back(Line());
+    //     last = millis();
+    // }
+    Serial.println("Nothing down");
 
-    for (int i = 0; i < a.size() - 1; i++)
+    for (int i = 0; i < a.size(); i++)
+    {
         a[i].update();
+        if (!a[i].isActive())
+            a.push_back(Line());
+    }
     // line.update();
 }
 
 void draw()
 {
-    for (int i = 0; i < a.size() - 1; i++)
+    for (int i = 0; i < a.size(); i++)
         a[i].draw();
     // line.draw();
 }

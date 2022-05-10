@@ -2,8 +2,9 @@
 #include "Arduino.h"
 #include <string.h>
 
+
 template <typename T>
-class vector
+struct vector
 {
 public:
     vector() : capacity_(0), count_(0), data_(nullptr) {}
@@ -63,7 +64,7 @@ public:
         data_[count_++] = obj;
     }
 
-    bool isempty()
+    bool isEmpty()
     {
         return count_ == 0;
     }
@@ -101,7 +102,6 @@ private:
         }
         else if (capacity > capacity_)
         {
-
             T *data = new T[capacity];
             count_ = min(count_, capacity);
             capacity_ = capacity;

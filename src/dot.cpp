@@ -48,7 +48,7 @@ uint8_t Dot::getY() { return y; }
 
 bool Dot::somethingDown()
 {
-    return (matrix.getRow(0, x) & (1 << (6 - y))) >> (6 - y) || y > 7;
+    return (matrix.getRow(0, x) & (1 << (6 - y))) >> (6 - y) || y > 6;
 }
 
 Dot::~Dot() {}

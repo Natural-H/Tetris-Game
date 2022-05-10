@@ -12,16 +12,28 @@ Line::Line(uint8_t x)
     dots[1] = Dot(x + 1);
 }
 
+Dot Line::getDowner()
+{
+    return min(dots[0].getY(), dots[1].getY()) == dots[0].getY() ? dots[0] : dots[1]; // I know, this is an awful implementation
+}
+
 void Line::update()
 {
-    if (digitalRead(3) && dots[0].getX() < 8)
-        setForm(Rotations::form2);
-
-    if (digitalRead(2) && dots[0].getX() >= 0)
-        setForm(Rotations::form1);
+    active = getDowner().isMoving;
 
     for (size_t i = 0; i < sizeof(dots) / sizeof(dots[0]); i++)
         dots[i].update(speed);
+
+    if (active)
+    {
+        if (formButton.isPressed())
+            setForm((Rotations)(form + 1) > Rotations::form4 ? Rotations::form1 : (Rotations)(form + 1));
+    }
+}
+
+bool Line::isActive()
+{
+    return active;
 }
 
 void Line::draw()
@@ -50,10 +62,10 @@ void Line::setForm(Rotations form)
         dots[1].setPoint(dots[0].getX() + 1, dots[0].getY());
         break;
     case Rotations::form2:
-        dots[1].setPoint(dots[0].getX(), dots[0].getY() + 1);
+        dots[1].setPoint(dots[0].getX(), dots[0].getY() - 1);
         break;
     case Rotations::form3:
-        dots[1].setPoint(dots[0].getX() - 1, dots[0].getY());
+        dots[1].setPoint(dots[0].getX() + 1, dots[0].getY());
         break;
     case Rotations::form4:
         dots[1].setPoint(dots[0].getX(), dots[0].getY() - 1);
