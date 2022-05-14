@@ -7,7 +7,7 @@ class Shape
 private:
 public:
     Shape();
-    enum class Rotations
+    enum Rotations
     {
         form1,
         form2,
