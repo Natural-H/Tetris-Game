@@ -23,6 +23,11 @@ void update()
         a[i].update();
         if (!lastActive->isActive())
         {
+            if (lastActive->dots[0].getY() == 0 && lastActive->dots[1].getY() == 0)
+            {
+                Serial.println("Stuck");
+                break;
+            }
             a.push_back(Line());
             lastActive = &a[i + 1]; // Using a.size() do bugs apparently
         }
