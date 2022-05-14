@@ -8,6 +8,8 @@ private:
     Dot dots[2];
     button formButton = 2;
     bool active = true;
+    bool last = false;
+
 
 public:
     void update() override;
