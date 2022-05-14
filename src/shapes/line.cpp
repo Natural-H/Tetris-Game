@@ -19,7 +19,8 @@ Dot Line::getDowner()
 
 void Line::update()
 {
-    bool newState = formButton.isPressed();
+    bool newStateR = rightButton.isPressed();
+    bool newStateL = leftButton.isPressed();
     active = !getDowner().somethingDown();
 
     for (size_t i = 0; i < sizeof(dots) / sizeof(dots[0]); i++)
@@ -27,16 +28,16 @@ void Line::update()
 
     if (active)
     {
-        if (newState != last && newState)
-        // setForm((Rotations)(form + 1) > Rotations::form4 ? Rotations::form1 : (Rotations)(form + 1));
-        {
+        if (newStateR != lastR && newStateR)
             moveRight();
-            Serial.println("a");
-        }
+        if (newStateL != lastL && newStateL)
+            moveLeft();
     }
 
-    last = newState;
+    lastR = newStateR;
+    lastL = newStateL;
 }
+// setForm((Rotations)(form + 1) > Rotations::form4 ? Rotations::form1 : (Rotations)(form + 1));
 
 bool Line::isActive()
 {
@@ -49,15 +50,16 @@ void Line::draw()
         dots[i].draw();
 }
 
-void Line::moveLeft()
-{
-    dots[0].setX(dots[0].getX() - 1);
-}
-
 void Line::moveRight()
 {
     dots[0].setX(dots[0].getX() + 1);
     dots[1].setX(dots[0].getX() + 1);
+}
+
+void Line::moveLeft()
+{
+    dots[1].setX(dots[1].getX() - 1);
+    dots[0].setX(dots[1].getX() - 1);
 }
 
 void Line::setForm(Rotations form)

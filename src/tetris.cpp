@@ -4,6 +4,8 @@
 #include "LedController.hpp"
 
 LedController Dot::matrix = LedController(13, 11, 12, 1);
+button Line::rightButton = 2;
+button Line::leftButton = 3;
 vector<Line> a;
 Line *lastActive;
 unsigned long last = 0;

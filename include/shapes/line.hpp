@@ -6,6 +6,15 @@ class Line : public Shape
 {
 public:
     Dot dots[2];
+    static button rightButton;
+    static button leftButton;
+
+private:
+    bool active = true;
+    bool lastR = false;
+    bool lastL = false;
+
+public:
     void update() override;
     void draw() override;
     void moveRight() override;
@@ -19,9 +28,4 @@ public:
     Line();
     Line(uint8_t);
     ~Line();
-
-private:
-    button formButton = 2;
-    bool active = true;
-    bool last = false;
 };
